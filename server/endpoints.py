@@ -35,7 +35,7 @@ MAIN_MENU_NM = 'Main Menu'
 HELLO = '/hello'
 MESSAGE = 'message'
 CHAR_TYPE_DICT = f'/{DICT}'
-CHAR_TYPE_DICT_W_NS = f'{CHAR_TYPES_NS}/{DICT}'
+CHAR_TYPE_DICT_W_NS = f'/{CHAR_TYPES_NS}/{DICT}'
 CHAR_TYPE_DICT_NM = f'{CHAR_TYPES_NS}_dict'
 CHAR_TYPE_LIST = f'/{LIST}'
 CHAR_TYPE_LIST_W_NS = f'{CHAR_TYPES_NS}/{LIST}'
@@ -82,7 +82,7 @@ class MainMenu(Resource):
         return {'Title': MAIN_MENU_NM,
                 'Default': 0,
                 'Choices': {
-                    '1': {'text': 'List Character Types'},
+                    '1': {'url': CHAR_TYPE_DICT_W_NS, 'method': 'get', 'text': 'List Character Types'},
                     '2': {'url': '/games/dict',
                           'method': 'get', 'text': 'List Active Games'},
                     '3': {'url': f'/{USER_DICT_W_NS}',
@@ -106,13 +106,15 @@ class CharacterTypeList(Resource):
 @char_types.route(CHAR_TYPE_DICT)
 class CharacterTypeDict(Resource):
     """
-    This will get a list of character types.
+    This will get a dict of character types.
     """
     def get(self):
         """
-        Returns a list of character types.
+        Returns a dict of character types.
         """
-        return {CHAR_TYPE_DICT_NM: ctyp.get_char_types()}
+        return {'Data': ctyp.get_char_types_dict(),
+                'Type': 'Data',
+                'Title': 'Character Types'}
 
 
 @char_types.route(f'{CHAR_TYPE_DETAILS}/<char_type>')

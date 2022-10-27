@@ -10,6 +10,11 @@ CHAR_TYPES = {WIZARD: {'health': 7, 'magic': 10},
               WARRIOR: {'health': 9, 'strength': 9},
               MAGE: {'health': 6}, }
 
+def get_char_types_dict():
+    """
+    Returns a dict of character types.
+    """
+    return CHAR_TYPES
 
 def get_char_types():
     """
